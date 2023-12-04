@@ -1,0 +1,10 @@
+    picklaws = [""]*3
+    laws = int()
+    index = int()
+    while laws != 1:
+        laws = 0
+        for index in range (0,3):
+                picklaws[index] = turtle.textinput("Write 3 Laws", "Type in a law for your country:")
+                wait2()
+                if index == 2:
+                    laws = 1
