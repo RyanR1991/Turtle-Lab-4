@@ -1,0 +1,662 @@
+##|----------------------------------------------|##
+##|         Ryan Ritchie and Kelly Bryson        |##
+##|                  12/04/23                    |##
+##|                  ITCS-1140                   |##
+##|            Mondays 6:00pm - 9:55pm           |##
+##|----------------------------------------------|##
+##|                                              |##
+##|-- Turtle Lab 4 - Country and Flag Designer --|##
+##|                                              |##
+##|                                              |##
+##| Arrays, El-If, main module - Kelly           |##
+##| Draw modules, loops, final assembly - Ryan   |##
+##|----------------------------------------------|##
+
+
+##|--------------- GitHub Page ------------------|##
+##|  https://github.com/RyanR1991/Turtle-Lab-4   |##
+##|----------------------------------------------|##
+
+import turtle
+import time
+
+##|----------------------------------------------|##
+##|                                              |##
+##|------------ Universal Modules ---------------|##
+##|                                              |##
+##| Includes main() module and calls to other    |##
+##| modules that runs the program in sequence    |##
+##|                                              |##
+##| Arrays and variables - Kelly                 |##
+##| Calls and universal modules - Ryan           |##
+##|----------------------------------------------|##
+
+def main():
+    turtle.setup(1100,800)
+    
+    ##-- Variables and Arrays --------------------##
+    picklaws = str()
+    picklaws = [" "]*3
+    
+    mult = int()
+    mult = 1 #determines shape draw size on call
+    
+    country = str()
+    country = [" "]*4
+
+    flag = str()
+    flag = [" "]*3
+
+    ##-- Run intro, name select, shape select ----##
+    startscreen()
+    country_name = pick_name()
+    shape_color = "blue" #default color on shapes
+    shape = shape_selections(mult, shape_color)
+
+    ##-- multiplier increases shape size ---------##
+    mult = 2.5
+
+    ##-- Calls to populate arrays elements -------##
+    flag_color, shape_color = color_selections(shape_color)
+    law1, law2, law3 = pick_laws(country_name)
+    
+    ##-- Array Loading ---------------------------##
+
+    picklaws[0] = law1
+    picklaws[1] = law2
+    picklaws[2] = law3
+
+    
+    country[0] = country_name
+    country[1] = law1
+    country[2] = law2
+    country[3] = law3
+
+    flag[0] = shape
+    flag[1] = flag_color
+    flag[2] = shape_color
+
+    ##-- Finalization ----------------------------##
+    finalize()
+
+    ##-- End Screen ------------------------------##
+    end_screen(country, flag, mult)
+
+    ##-- END OF MAIN MODULE ----------------------##
+
+
+    ##-- Universal modules for repetition --------##
+def fast():
+    turtle.speed(0)
+
+def clear():
+    turtle.reset()
+
+def wait4():
+    time.sleep(4)
+
+def wait2():
+    time.sleep(2)
+
+##|----------------------------------------------|##
+##|                                              |##
+##|--------------- Start Screen -----------------|##
+##|                                              |##    
+##| Simple introduction screen for the program   |##
+##|                                              |##
+##| Arrays and variables - Kelly                 |##
+##| Calls and universal modules - Ryan           |##
+##|----------------------------------------------|##
+
+def startscreen():
+    fast()
+    turtle.hideturtle()
+
+    turtle.penup()
+    turtle.goto(-400,60)
+    turtle.write("Welcome to the flag and country designer!", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-450,0)
+    wait2()
+    turtle.write("You will name your country and create your flag.", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-400,-60)
+    wait4()
+    turtle.write("You can also specify a few laws or ideals.", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-100,-180)
+    wait2()
+    turtle.write("Let's Begin!", font=("Bahnschrift", 30, "bold"))
+    wait4()
+    clear()
+    
+##|----------------------------------------------|##
+##|                                              |##
+##|--------------- Country Name -----------------|##
+##|                                              |##
+##| User picks country name, shape is for style  |##
+##|                                              |##
+##| pick_name module - Kelly                     |##
+##|----------------------------------------------|##
+
+def pick_name():
+    turtle.hideturtle()
+    turtle.penup()
+    turtle.goto(0,-50)
+    turtle.pendown()
+        
+    turtle.penup()
+    turtle.goto(-500,350)
+    turtle.write("First, let's name your newfound country!", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-500,300)
+    wait2()
+    turtle.write("Feel free to give it any name you want.", font=("Bahnschrift", 30, "bold"))
+    wait4()
+    country_name = turtle.textinput("Name your country", "What would you like to name your country?")
+    turtle.goto(-500,200)
+    wait2()
+
+    ##-- Writes the name that user typed ---------##
+    turtle.write("You named your country:", font=("Bahnschrift", 30, "bold"))
+    wait2()
+    turtle.goto(-50,200)
+    turtle.write(country_name, font=("Bahnschrift", 30, "bold"))
+    
+    turtle.goto(-500,100)
+    wait2()
+    turtle.write("Let's Continue.", font=("Bahnschrift", 30, "bold"))
+    
+    wait4()
+    clear()
+    return country_name #send country_name to main()
+
+##|----------------------------------------------|##
+##|                                              |##
+##|-------------- Shape Selections --------------|##
+##|                                              |##
+##| User will choose a shape on their flag       |##
+##|                                              |##
+##| Shape choice module - Kelly                  |##
+##| Drawing modules - Ryan                       |##
+##|----------------------------------------------|##
+
+    ##-- Module will draw shapes as demo for what ##
+    ##-- shapes that the user can pick from ------##
+
+def shape_selections(mult, shape_color):
+    turtle.hideturtle()
+    turtle.penup()
+    
+    turtle.goto(-500,350)
+    turtle.write("Now, let's choose some details for your flag.", font=("Bahnschrift", 30, "bold"))
+    wait2()
+    turtle.goto(-500,300)
+    turtle.write("Choose a shape that will represent your country.", font=("Bahnschrift", 30, "bold"))
+    wait2()
+    turtle.goto(-500,250)
+    turtle.write("The following shapes are your options:", font=("Bahnschrift", 30, "bold"))
+    draw_shapes(mult, shape_color)
+    name_shapes()
+    wait2()
+    
+    shape_choice = str()
+    shape_choice = turtle.textinput("Chose Your Shape", "Which shape? circle, triangle, star4, star5, or sun:")
+
+    ##-- Filter Shape Choice -----------##
+    if shape_choice == "circle":
+        shape = "circle"
+    elif shape_choice == "triangle":
+        shape = "triangle"
+    elif shape_choice == "star4":
+        shape = "star4"
+    elif shape_choice == "star5":
+        shape = "star5"
+    else:
+        shape = "sun"
+    ##----------------------------------##
+        
+    turtle.goto(-500, 150)
+    wait2()
+    turtle.speed(5)
+    turtle.write("You chose: " + shape, font=("Bahnschrift", 30, "bold"))
+
+    wait4()
+    clear()
+    return shape #Returns choice to main()
+
+##---- Shape draw modules -----------------------------------------##
+
+def draw_shapes(mult,shape_color): #Uses mult parameter to determine shape size
+    fast()
+
+    ##-- Goto commands with shape draw calls ##
+    turtle.goto(-400,-200)
+    circle(mult, shape_color)
+    turtle.goto(-230,-200)
+    triangle(mult, shape_color)
+    turtle.goto(0,-140)
+    star4(mult, shape_color)
+    turtle.goto(200,-140)
+    star5(mult, shape_color)
+    turtle.goto(350,-170)
+    sun(mult, shape_color)
+
+    ##-------------------------------------##
+    ##-- Modules to draw shapes -----------##
+    ##-- These are reused in the end screen##
+    ##-- with the mult paramater to boost  ##
+    ##-- the size of the shape on the flag ##
+    ##-------------------------------------##
+    
+def circle(mult, shape_color):
+    turtle.pendown()
+    turtle.fillcolor(shape_color)
+    turtle.begin_fill()
+    turtle.circle(50*mult)
+    turtle.end_fill()
+    turtle.penup()
+
+def triangle(mult, shape_color):
+    turtle.pendown()
+    turtle.fillcolor(shape_color)
+    turtle.begin_fill()
+    for sides in range(3):
+        turtle.forward(110*mult)
+        turtle.left(120)
+    turtle.end_fill()
+    turtle.penup()
+    
+def star4(mult, shape_color):
+    turtle.pendown()
+    turtle.fillcolor(shape_color)
+    turtle.begin_fill()
+    angle = 150
+    side = 50*mult
+    points = 4
+    rotate = 360/points
+    angle_left = angle
+    angle_right = angle
+    turtle.setheading(360/points)
+
+    for sides in range(points):
+        turtle.forward(side)
+        turtle.right(angle_right)
+        turtle.forward(side)
+        turtle.left(angle_left)
+        turtle.right(rotate)
+            
+    turtle.end_fill()
+    turtle.penup()
+
+def star5(mult, shape_color):
+    turtle.pendown()
+    turtle.fillcolor(shape_color)
+    turtle.begin_fill()
+    angle = 150
+    side = 40*mult
+    points = 5
+    rotate = 360/points
+    angle_left = angle
+    angle_right = angle
+    turtle.setheading(360/points)
+
+    for sides in range(points):
+        turtle.forward(side)
+        turtle.right(angle_right)
+        turtle.forward(side)
+        turtle.left(angle_left)
+        turtle.right(rotate)
+            
+    turtle.end_fill()
+    turtle.penup()
+
+def sun(mult, shape_color):
+    turtle.pendown()
+    turtle.fillcolor(shape_color)
+    turtle.begin_fill()
+    angle = 150
+    side = 20*mult
+    points = 20
+    rotate = 360/points
+    angle_left = angle
+    angle_right = angle
+    turtle.setheading(180)
+
+    for sides in range(points):
+        turtle.forward(side)
+        turtle.right(angle_right)
+        turtle.forward(side)
+        turtle.left(angle_left)
+        turtle.right(rotate)
+            
+    turtle.end_fill()
+    turtle.penup()
+    
+    ##-- Writes names under demo shapes ##
+def name_shapes():
+    turtle.goto(-450,-280)
+    turtle.write("circle", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-250,-280)
+    turtle.write("triangle", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-50,-280)
+    turtle.write("star4", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(150,-280)
+    turtle.write("star5", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(350,-280)
+    turtle.write("sun", font=("Bahnschrift", 30, "bold"))
+
+##|----------------------------------------------|##
+##|                                              |##
+##|------------- Color Selections ---------------|##
+##|                                              |##    
+##| Module that asks user for both a flag color  |##
+##| and the color for their chosen shape         |##
+##|                                              |##
+##| Color choice module - Kelly                  |##
+##| Shapes for color choices - Ryan              |##
+##|----------------------------------------------|##
+
+    ##-- Color choice module  --------------------##
+def color_selections(shape_color):
+    turtle.hideturtle()
+    turtle.penup()
+    
+    turtle.goto(-500,350)
+    turtle.write("Let's add a bit of color to your flag!", font=("Bahnschrift", 30, "bold"))
+    wait2()
+    turtle.goto(-500,300)
+    turtle.write("You will choose two colors.", font=("Bahnschrift", 30, "bold"))
+    wait2()
+    turtle.goto(-500,250)
+    turtle.write("One for your flag and one for your symbol.", font=("Bahnschrift", 30, "bold"))
+    wait2()
+    color_choices() #Calls module to generate color samples
+    write_colors() #Calls module to write color names
+
+    ##-- Output for Color Choice ------------##
+   
+    flag_color_choice = turtle.textinput("Choose Flag Color", "Flag color: red, blue, green, yellow, or orange:")
+    wait2()
+    shape_color_choice = turtle.textinput("Choose Symbol Color", "Symbol color: red, blue, green, yellow, or orange:")
+    wait2()
+
+    ##-- If-Else filters in case of errors --##
+    if flag_color_choice == "red":
+        flag_color = "red"
+    elif flag_color_choice == "blue":
+        flag_color = "blue"
+    elif flag_color_choice == "green":
+        flag_color = "green"
+    elif flag_color_choice == "yellow":
+        flag_color = "yellow"
+    elif flag_color_choice == "orange":
+        flag_color = "orange"
+    else:
+        flag_color = "blue"
+
+    if shape_color_choice == "red":
+        shape_color = "red"
+    elif shape_color_choice == "blue":
+        shape_color = "blue"
+    elif shape_color_choice == "green":
+        shape_color = "green"
+    elif shape_color_choice == "yellow":
+        shape_color = "yellow"
+    elif shape_color_choice == "orange":
+        shape_color = "orange"
+    else:
+        shape_color = "orange"
+    ##---------------------------------------##
+    
+    
+    turtle.goto(-500,50)
+    turtle.write("Your flag color is: " + flag_color, font=("Bahnschrift", 30, "bold"))
+    wait2()
+    turtle.goto(-500,0)
+    turtle.write("Your symbol color is: " + shape_color, font=("Bahnschrift", 30, "bold"))
+
+    wait4()
+    clear()
+    return flag_color, shape_color #Return colors to main()
+
+
+    ##-- Squares with Color Options ---------##
+def color_choices():
+    fast()
+    mult = 1.5
+    
+    turtle.goto(-400,-200)
+    shape_color = "red"
+    circle(mult, shape_color)
+    
+    turtle.goto(-200,-200)
+    shape_color = "blue"
+    circle(mult, shape_color)
+    
+    turtle.goto(0,-200)
+    shape_color = "green"
+    circle(mult, shape_color)
+    
+    turtle.goto(200,-200)
+    shape_color = "yellow"
+    circle(mult, shape_color)
+    
+    turtle.goto(400,-200)
+    shape_color = "orange"
+    circle(mult, shape_color)
+
+def write_colors():
+    fast()
+    turtle.goto(-430,-250)
+    turtle.write("red", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-250,-250)
+    turtle.write("blue", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-60,-250)
+    turtle.write("green", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(140,-250)
+    turtle.write("yellow", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(330,-250)
+    turtle.write("orange", font=("Bahnschrift", 30, "bold"))
+
+##|----------------------------------------------|##
+##|                                              |##
+##|----------------- Pick Laws ------------------|##
+##|                                              |##
+##| A module allowing the user to come up with   |##
+##| up to three laws for their new country       |##
+##|                                              |##
+##| Laws module for array - Kelly                |##
+##| Nested law loop for 3 laws - Ryan            |##
+##|----------------------------------------------|##
+
+    ##-- Module to prompt user for laws ----------##
+def pick_laws(country_name):
+    turtle.hideturtle()
+    turtle.penup()
+    
+    turtle.goto(-500,350)
+    turtle.write("Now that your country has a name and a flag,", font=("Bahnschrift", 30, "bold"))
+    wait2()
+    turtle.goto(-500,300)
+    turtle.write("let's make laws for " + country_name + "!", font=("Bahnschrift", 30, "bold"))
+    wait2()
+    turtle.goto(-500,250)
+    turtle.write("Write 3 short laws that reflect your core values.", font=("Bahnschrift", 30, "bold"))
+    wait2()
+    turtle.goto(-500,200)
+    turtle.write("They can be anything you want them to be!", font=("Bahnschrift", 30, "bold"))
+
+##-- Nested loop to avoid blank laws -------------##
+    picklaws = [""]*3
+    laws = int()
+    index = int()
+    while laws != 1:
+        laws = 0
+        for index in range (0,3):
+                picklaws[index] = turtle.textinput("Write 3 Laws", "Type in a law for your country:")
+                wait2()
+                if index == 2 and picklaws[index] != None:
+                    laws = 1
+
+
+##-- Outputs user's laws to the screen -----------##
+    turtle.goto(-500,100)
+    turtle.write("These laws are hearby absolute in " + country_name + ":", font=("Bahnschrift", 30, "bold"))
+    wait2()
+    turtle.goto(-500,0)
+    turtle.write(picklaws[0], font=("Bahnschrift", 30, "bold"))
+    wait2()
+    turtle.goto(-500,-50)
+    turtle.write(picklaws[1], font=("Bahnschrift", 30, "bold"))
+    wait2()
+    turtle.goto(-500,-100)
+    turtle.write(picklaws[2], font=("Bahnschrift", 30, "bold"))
+
+    wait4()
+    clear()
+    return picklaws #Returns laws to main()
+
+##|----------------------------------------------|##
+##|                                              |##
+##|---------------- Finalization ----------------|##
+##|                                              |##
+##| Flavor text as transition screen             |##
+##|                                              |##
+##| Finalize screen - Ryan                       |##
+##|----------------------------------------------|##
+
+def finalize():
+    turtle.hideturtle()
+
+    turtle.penup()
+    turtle.goto(-175,50)
+    turtle.write("We're all done!", font=("Bahnschrift", 30, "bold"))
+    wait2()
+    turtle.goto(-400,0)
+    wait2()
+    turtle.write("Now that you have made all your choices,", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-350,-50)
+    wait4()
+    turtle.write("we can show off your new country.", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-350,-180)
+    wait2()
+    turtle.write("Let's see how it all comes together!", font=("Bahnschrift", 30, "bold"))
+    wait4()
+    clear()   
+
+##|----------------------------------------------|##
+##|                                              |##
+##|---------------- End Screen ------------------|##
+##|                                              |##
+##| This screen combines array data to generate  |##
+##| an iamge of the flag, with the country name  |##
+##| written over top of the flag the user made.  |##
+##|                                              |##
+##| Additionally, their manually typed laws will |##
+##| be printed under the user-designed flag      |##
+##|                                              |##
+##| Ending with array data - Kelly               |##
+##| Blank flag module for ending - Ryan          |##
+##|----------------------------------------------|##
+
+def end_screen(country, flag, mult): #Arrays used as parameters
+    turtle.hideturtle()
+    turtle.penup()
+    
+    ##-- Write Country Name ----------##
+    turtle.goto(-300,305)
+    turtle.write(country[0], font=("Bahnschrift", 60, "bold"))
+
+    ##-- Pull and Assign Array Data --##
+    symbol_shape = str()
+    symbol_shape = flag[0]
+    
+    flag_color = str()
+    flag_color = flag[1]
+
+    shape_color = str()
+    shape_color = flag[2]
+
+    law1 = str()
+    law1 = country[1]
+    law2 = str()
+    law2 = country[2]
+    law3 = str()
+    law3 = country[3]
+
+    ##-- Draw Blank Flag -------------##
+    draw_flag(flag_color)
+
+    ##----------------------------------##
+    ##-- El-If filter for Symbol -------##
+    ##-- Assigns colors and shape       ##
+    ##-- choice, as well as aesthetics  ##
+    ##----------------------------------##
+    if symbol_shape == "circle":
+        turtle.goto(-150,275)
+        circle(mult, shape_color)
+        circle((mult*0.5), flag_color)
+    elif symbol_shape == "triangle":
+        turtle.goto(-25,300)
+        triangle(mult, shape_color)
+        turtle.goto(-50,275)
+        triangle((mult*0.5), flag_color)
+    elif symbol_shape == "star4":
+        turtle.goto(-175,175)
+        star4(mult, shape_color)
+    elif symbol_shape == "star5":
+        turtle.goto(-175,175)
+        star5(mult, shape_color)
+    else:
+        turtle.goto(-225,125)
+        sun(mult, shape_color)
+
+    ##-- Write Out Laws --------------##
+    turtle.goto(-500,-100)
+    wait2()
+    turtle.write(law1, font=("Bahnschrift", 45, "bold"))
+    turtle.goto(-500,-170)
+    wait2()
+    turtle.write(law2, font=("Bahnschrift", 45, "bold"))
+    turtle.goto(-500,-240)
+    wait2()
+    turtle.write(law3, font=("Bahnschrift", 45, "bold"))
+
+    ##-- Blank Flag Draw Module -------##
+
+def draw_flag(flag_color):
+    fast()
+    turtle.penup()
+    turtle.goto(0,0)
+    turtle.pendown()
+    turtle.pencolor("black")
+    turtle.fillcolor(flag_color)
+    turtle.begin_fill()
+    turtle.setheading(180)
+    turtle.forward(300)
+    turtle.right(90)
+    turtle.forward(300)
+    turtle.right(90)
+    turtle.forward(600)
+    turtle.right(90)
+    turtle.forward(300)
+    turtle.right(90)
+    turtle.forward(300)
+    turtle.end_fill()
+    turtle.penup()
+    
+##|----------------------------------------------|##
+##|                                              |##
+##|--------------- Calling Main -----------------|##
+##|                                              |##
+##|----------------------------------------------|##
+
+main()
+
+
+
+
+##|----------------------------------------------|##
+##|                                              |##
+##|--------------- ____________ -----------------|##
+##|                                              |##
+##|----------------------------------------------|##
+    
+
