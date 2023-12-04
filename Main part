@@ -1,0 +1,30 @@
+
+import turtle
+import time
+
+##-- Main Module with calls ----------------------##
+def main():
+    turtle.setup(1100,800)
+    
+    ##-- Variables -------------------------------##
+    mult = int()
+    mult = 1 #Determines shape draw size on call
+
+
+    ##-- Run intro, name select, shape select ----##
+    startscreen()
+    country_name = pick_name()
+    shape_color = "blue" #Default color on shapes
+    shape = shape_selections(mult, shape_color)
+
+    ##-- multiplier increases shape size ---------##
+    mult = 2.5
+
+    ##-- Calls to populate arrays elements -------##
+    flag_color, shape_color = color_selections(shape_color)
+    law1, law2, law3 = pick_laws(country_name)
+
+    finalize()
+    end_screen(country, flag, mult)
+
+    ##-- END OF MAIN MODULE ----------------------##
