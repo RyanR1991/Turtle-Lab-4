@@ -1,0 +1,82 @@
+##-- Squares with Color Options ------------------##
+def color_choices():
+    fast()
+    mult = 1.5
+    
+    turtle.goto(-400,-200)
+    shape_color = "red"
+    circle(mult, shape_color)
+    
+    turtle.goto(-200,-200)
+    shape_color = "blue"
+    circle(mult, shape_color)
+    
+    turtle.goto(0,-200)
+    shape_color = "green"
+    circle(mult, shape_color)
+    
+    turtle.goto(200,-200)
+    shape_color = "yellow"
+    circle(mult, shape_color)
+    
+    turtle.goto(400,-200)
+    shape_color = "orange"
+    circle(mult, shape_color)
+
+def write_colors():
+    fast()
+    turtle.goto(-430,-250)
+    turtle.write("red", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-250,-250)
+    turtle.write("blue", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-60,-250)
+    turtle.write("green", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(140,-250)
+    turtle.write("yellow", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(330,-250)
+    turtle.write("orange", font=("Bahnschrift", 30, "bold"))
+
+
+##-- Ending, where all choices come together -----##
+##-- to create the final flag
+
+def finalize():
+    turtle.hideturtle()
+
+    turtle.penup()
+    turtle.goto(-175,50)
+    turtle.write("We're all done!", font=("Bahnschrift", 30, "bold"))
+    wait2()
+    turtle.goto(-400,0)
+    wait2()
+    turtle.write("Now that you have made all your choices,", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-350,-50)
+    wait4()
+    turtle.write("we can show off your new country.", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-350,-180)
+    wait2()
+    turtle.write("Let's see how it all comes together!", font=("Bahnschrift", 30, "bold"))
+    wait4()
+    clear()   
+
+##-- Blank flag for final flag at end screen -----##
+def draw_flag(flag_color):
+    fast()
+    turtle.penup()
+    turtle.goto(0,0)
+    turtle.pendown()
+    turtle.pencolor("black")
+    turtle.fillcolor(flag_color)
+    turtle.begin_fill()
+    turtle.setheading(180)
+    turtle.forward(300)
+    turtle.right(90)
+    turtle.forward(300)
+    turtle.right(90)
+    turtle.forward(600)
+    turtle.right(90)
+    turtle.forward(300)
+    turtle.right(90)
+    turtle.forward(300)
+    turtle.end_fill()
+    turtle.penup()
