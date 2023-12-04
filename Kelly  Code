@@ -1,0 +1,199 @@
+#start variables and array loading
+#main()
+    country = str()
+    country = [" "]*4
+    flag = str()
+    flag = [" "]*
+    startscreen()
+
+    country[0] = country_name
+    country[1] = law1
+    country[2] = law2
+    country[3] = law3
+    flag[0] = shape
+    flag[1] = flag_color
+    flag[2] = shape_color
+
+
+
+    
+
+#name function
+
+def pick_name():
+    turtle.penup()
+    turtle.goto(x,x)
+    turtle.write("First, let's name your newfound country!", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(x,x)
+    turtle.write("Feel free to give it any name you want.", font=("Bahnschrift", 30, "bold"))
+    country_name = turtle.textinput("Name your country", "What would you like to name your country?")
+    turtle.goto(x,x)
+    turtle.write("You named your country:", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(x,x)
+    turtle.write(country_name, font=("Bahnschrift", 30, "bold"))
+    turtle.goto(x,x)
+    turtle.write("Let's Continue.", font=("Bahnschrift", 30, "bold"))
+    return country_name #send country_name to main()
+
+
+
+
+
+#choose shape function
+def shape_selections(shape_color):
+    turtle.hideturtle()
+    turtle.penup()
+    turtle.goto(x,x)
+    turtle.write("Now, let's choose some details for your flag.", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(x,x)
+    turtle.write("Choose a shape that will represent your country.", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(x,x)
+    turtle.write("The following shapes are your options:", font=("Bahnschrift", 30, "bold"))
+    draw_shapes(shape_color)
+    name_shapes()
+    shape_choice = str()
+    shape_choice = turtle.textinput("Chose Your Shape", "Which shape? circle, triangle, star4, star5, or sun:")
+
+
+
+
+
+#if statement for shapes
+    if shape_choice == "circle":
+        shape = "circle"
+    elif shape_choice == "triangle":
+        shape = "triangle"
+    elif shape_choice == "star4":
+        shape = "star4"
+    elif shape_choice == "star5":
+        shape = "star5"
+    else:
+        shape = "sun"
+        
+    turtle.goto(x,x)
+    turtle.write("You chose: " + shape, font=("Bahnschrift", 30, "bold"))
+    return shape #returns choice to main()
+
+
+
+
+
+#choose colors
+def color_selections(shape_color):
+    turtle.hideturtle()
+    turtle.penup()
+    
+    turtle.goto(x,x)
+    turtle.write("Let's add a bit of color to your flag!", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(x,x)
+    turtle.write("You will choose two colors.", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(x,x)
+    turtle.write("One for your flag and one for your symbol.", font=("Bahnschrift", 30, "bold"))
+    color_choices() #calls module to generate color samples
+    write_colors() #calls module to write color names
+    flag_color_choice = turtle.textinput("Choose Flag Color", "Flag color: red, blue, green, yellow, or orange:")
+    shape_color_choice = turtle.textinput("Choose Symbol Color", "Symbol color: red, blue, green, yellow, or orange:")
+
+#if statements for colors
+    if flag_color_choice == "red":
+        flag_color = "red"
+    elif flag_color_choice == "blue":
+        flag_color = "blue"
+    elif flag_color_choice == "green":
+        flag_color = "green"
+    elif flag_color_choice == "yellow":
+        flag_color = "yellow"
+    elif flag_color_choice == "orange":
+        flag_color = "orange"
+    else:
+        flag_color = "blue"
+
+    if shape_color_choice == "red":
+        shape_color = "red"
+    elif shape_color_choice == "blue":
+        shape_color = "blue"
+    elif shape_color_choice == "green":
+        shape_color = "green"
+    elif shape_color_choice == "yellow":
+        shape_color = "yellow"
+    elif shape_color_choice == "orange":
+        shape_color = "orange"
+    else:
+        shape_color = "orange"
+        
+    turtle.goto(x,x)
+    turtle.write("Your flag color is: " + flag_color, font=("Bahnschrift", 30, "bold"))
+    turtle.goto(x,x)
+    turtle.write("Your symbol color is: " + shape_color, font=("Bahnschrift", 30, "bold"))
+    return flag_color, shape_color #return colors to main()
+
+
+
+
+
+#ask for laws
+def pick_laws(country_name):
+    turtle.hideturtle()
+    turtle.penup()  
+    turtle.goto(x,x)
+    turtle.write("Now that your country has a name and a flag,", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(x,x)
+    turtle.write("let's make laws for " + country_name + "!", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(x,x)
+    turtle.write("Write 3 short laws that reflect your core values.", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(x,x)
+    turtle.write("They can be anything you want them to be!", font=("Bahnschrift", 30, "bold"))
+#prompt to enter law
+    picklaws[index] = turtle.textinput("Write 3 Laws", "Type in a law for your country:")
+    return picklaws
+
+
+
+#final function
+def end_screen(country, flag): #arrays for parameters
+    turtle.hideturtle()
+    turtle.penup()
+    turtle.goto(x,x)
+    turtle.write(country[0], font=("Bahnschrift", 60, "bold"))
+
+    symbol_shape = str()
+    symbol_shape = flag[0]
+    flag_color = str()
+    flag_color = flag[1]
+    shape_color = str()
+    shape_color = flag[2]
+    law1 = str()
+    law1 = country[1]
+    law2 = str()
+    law2 = country[2]
+    law3 = str()
+    law3 = country[3]
+    draw_flag(flag_color)
+
+#if statement for shape call
+    if symbol_shape == "circle":
+        turtle.goto(x,x)
+        circle(shape_color)
+    elif symbol_shape == "triangle":
+        turtle.goto(x,x)
+        triangle(shape_color)
+    elif symbol_shape == "star4":
+        turtle.goto(x,x)
+        star4(shape_color)
+    elif symbol_shape == "star5":
+        turtle.goto(x,x)
+        star5(shape_color)
+    else:
+        turtle.goto(x,x)
+        sun(shape_color)
+
+    turtle.goto(x,x)
+    turtle.write(law1, font=("Bahnschrift", 45, "bold"))
+    turtle.goto(x,x)
+    turtle.write(law2, font=("Bahnschrift", 45, "bold"))
+    turtle.goto(x,x)
+    turtle.write(law3, font=("Bahnschrift", 45, "bold"))
+
+
+
+    
