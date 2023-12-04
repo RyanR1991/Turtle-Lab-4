@@ -1,0 +1,122 @@
+##---- Shape draw modules ------------------------##
+
+def draw_shapes(mult,shape_color):
+    #Uses mult parameter to determine shape size
+    fast()
+
+    ##-- Goto commands with shape draw calls ##
+    turtle.goto(-400,-200)
+    circle(mult, shape_color)
+    turtle.goto(-230,-200)
+    triangle(mult, shape_color)
+    turtle.goto(0,-140)
+    star4(mult, shape_color)
+    turtle.goto(200,-140)
+    star5(mult, shape_color)
+    turtle.goto(350,-170)
+    sun(mult, shape_color)
+
+    ##-------------------------------------##
+    ##-- Modules to draw shapes -----------##
+    ##-- These are reused in the end screen##
+    ##-- with the mult paramater to boost  ##
+    ##-- the size of the shape on the flag ##
+    ##-------------------------------------##
+    
+def circle(mult, shape_color):
+    turtle.pendown()
+    turtle.fillcolor(shape_color)
+    turtle.begin_fill()
+    turtle.circle(50*mult)
+    turtle.end_fill()
+    turtle.penup()
+
+def triangle(mult, shape_color):
+    turtle.pendown()
+    turtle.fillcolor(shape_color)
+    turtle.begin_fill()
+    for sides in range(3):
+        turtle.forward(110*mult)
+        turtle.left(120)
+    turtle.end_fill()
+    turtle.penup()
+    
+def star4(mult, shape_color):
+    turtle.pendown()
+    turtle.fillcolor(shape_color)
+    turtle.begin_fill()
+    angle = 150
+    side = 50*mult
+    points = 4
+    rotate = 360/points
+    angle_left = angle
+    angle_right = angle
+    turtle.setheading(360/points)
+
+    for sides in range(points):
+        turtle.forward(side)
+        turtle.right(angle_right)
+        turtle.forward(side)
+        turtle.left(angle_left)
+        turtle.right(rotate)
+            
+    turtle.end_fill()
+    turtle.penup()
+
+def star5(mult, shape_color):
+    turtle.pendown()
+    turtle.fillcolor(shape_color)
+    turtle.begin_fill()
+    angle = 150
+    side = 40*mult
+    points = 5
+    rotate = 360/points
+    angle_left = angle
+    angle_right = angle
+    turtle.setheading(360/points)
+
+    for sides in range(points):
+        turtle.forward(side)
+        turtle.right(angle_right)
+        turtle.forward(side)
+        turtle.left(angle_left)
+        turtle.right(rotate)
+            
+    turtle.end_fill()
+    turtle.penup()
+
+def sun(mult, shape_color):
+    turtle.pendown()
+    turtle.fillcolor(shape_color)
+    turtle.begin_fill()
+    angle = 150
+    side = 20*mult
+    points = 20
+    rotate = 360/points
+    angle_left = angle
+    angle_right = angle
+    turtle.setheading(180)
+
+    for sides in range(points):
+        turtle.forward(side)
+        turtle.right(angle_right)
+        turtle.forward(side)
+        turtle.left(angle_left)
+        turtle.right(rotate)
+            
+    turtle.end_fill()
+    turtle.penup()
+
+    
+##-- Writes names under demo shapes --------------##
+def name_shapes():
+    turtle.goto(-450,-280)
+    turtle.write("circle", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-250,-280)
+    turtle.write("triangle", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-50,-280)
+    turtle.write("star4", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(150,-280)
+    turtle.write("star5", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(350,-280)
+    turtle.write("sun", font=("Bahnschrift", 30, "bold"))
