@@ -1,0 +1,34 @@
+    ##-- Universal modules for repetition --------##
+def fast():
+    turtle.speed(0)
+
+def clear():
+    turtle.reset()
+
+def wait4():
+    time.sleep(4)
+
+def wait2():
+    time.sleep(2)
+
+##-- Start screen for flavor text ----------------##
+def startscreen():
+    fast()
+    turtle.hideturtle()
+
+    turtle.penup()
+    turtle.goto(-400,60)
+    turtle.write("Welcome to the flag and country designer!", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-450,0)
+    wait2()
+    turtle.write("You will name your country and create your flag.", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-400,-60)
+    wait4()
+    turtle.write("You can also specify a few laws or ideals.", font=("Bahnschrift", 30, "bold"))
+    turtle.goto(-100,-180)
+    wait2()
+    turtle.write("Let's Begin!", font=("Bahnschrift", 30, "bold"))
+    wait4()
+    clear()
+    
+
